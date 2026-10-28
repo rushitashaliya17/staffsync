@@ -1,0 +1,6 @@
+{
+  "name": "StaffSync - Modern HRM System",
+  "description": "Enterprise-grade Human Resource Management System with role-based access control, attendance tracking, leave workflows, announcements, and training management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
