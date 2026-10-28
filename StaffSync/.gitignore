@@ -1,7 +1,0 @@
-**/node_modules/
-dist/
-client/dist/
-server/data/staffsync.json
-server/.env
-*.log
-.DS_Store
