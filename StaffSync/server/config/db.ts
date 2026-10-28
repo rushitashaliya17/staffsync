@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // StaffSync Persistent JSON Database Store
 // Mirroring MongoDB collections, indexes, and document structures with persistence to disk.
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const DATA_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../data');
 const DB_FILE = path.join(DATA_DIR, 'staffsync.json');
 
 export interface IDatabase {

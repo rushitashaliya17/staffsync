@@ -1,8 +1,9 @@
-import path from 'path';
+import path from 'node:path';
 import { fileURLToPath } from 'url';
 import express from 'express';
-import { createApp } from './server/app.js';
-import { runSeed } from './server/scripts/seed.js';
+import 'dotenv/config';
+import { createApp } from './app.js';
+import { runSeed } from './scripts/seed.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,17 +22,9 @@ async function startServer() {
   // 2. Initialize Express application
   const app = createApp();
 
-  if (!isProd) {
-    // Development mode: Vite middleware
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa'
-    });
-    app.use(vite.middlewares);
-  } else {
-    // Production mode: Serve built static files
-    const distPath = path.resolve(__dirname, 'dist');
+  if (isProd) {
+    // Production mode: serve the client build alongside the API.
+    const distPath = path.resolve(__dirname, '../client/dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(distPath, 'index.html'));
